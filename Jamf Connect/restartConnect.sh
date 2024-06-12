@@ -80,6 +80,7 @@ if [ -n "$JAMF_CONNECT_PID" ]; then
     
     # Force quit Jamf Connect
     kill -9 "$JAMF_CONNECT_PID"
+    sleep 10 #ensure it fully stops
     
     if [ $? -eq 0 ]; then
         log_message "Successfully force quit Jamf Connect."

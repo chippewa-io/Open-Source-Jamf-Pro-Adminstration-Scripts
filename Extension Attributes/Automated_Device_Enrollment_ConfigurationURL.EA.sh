@@ -44,12 +44,37 @@
 #
 # ----------------------------------------------------------------------------------------------------------------------------
 # Requirements:
-# - v10.12.6 of profiles binary or later
+# - macOS 10.12.6 or later
 # - Technically, you'd need Jamf Pro to report as an EA.  However, the script will still run on a non-Jamf Pro managed Mac, 
 #  it's output though was designed for use as Extension Attribute.
 # 
 #
 # ----------------------------------------------------------------------------------------------------------------------------
+
+######################################################
+# Ensure we're running macOS 10.12.6 or later
+
+# Get the macOS version
+os_version=$(sw_vers -productVersion)
+
+# Split the version into its components
+IFS='.' read -r major minor patch <<< "$os_version"
+
+# Set the minimum required version components
+min_major=10
+min_minor=12
+min_patch=6
+
+# Compare the version components
+if (( major > min_major )) || 
+   (( major == min_major && minor > min_minor )) || 
+   (( major == min_major && minor == min_minor && patch >= min_patch )); then
+    echo "macOS version is sufficient: $os_version"
+else
+    echo "macOS 10.12.6 or later required"
+    echo "<result>macOS 10.12.6 or later required</result>"
+    exit 0
+fi
 
 ######################################################
 # Get the Automated Device Enrollment ConfigurationURL

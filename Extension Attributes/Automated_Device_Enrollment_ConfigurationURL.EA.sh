@@ -44,7 +44,9 @@
 #
 # ----------------------------------------------------------------------------------------------------------------------------
 # Requirements:
-# 
+# - v10.12.6 of profiles binary or later
+# - Technically, you'd need Jamf Pro to report as an EA.  However, the script will still run on a non-Jamf Pro managed Mac, 
+#  it's output though was designed for use as Extension Attribute.
 # 
 #
 # ----------------------------------------------------------------------------------------------------------------------------

@@ -18,6 +18,7 @@
 # Version Control:
 #
 # 1.0 - Initial Release - 9/13/24 - Chris Cohoon, Chippewa Limited Liability Co.
+# 1.1 - Added App Name to the Zip File - 9/13/24 - Chris Cohoon, Chippewa Limited Liability Co.
 #       
 #
 #----------------------------------------------------------------------------------------------------------------------------
@@ -49,9 +50,6 @@
 # - macOS Sonoma 
 #
 # ----------------------------------------------------------------------------------------------------------------------------
-
-# Current Logged in user
-user=$(stat -f %Su /dev/console)
 # Current Date and time 
 date=$(date +%s)
 # Current Hostname
@@ -62,6 +60,9 @@ LOG_FILE="$4"
 
 # Get the webhook URL from argument $5
 WEBHOOK_URL="$5"
+
+# Get App or Log Name from argument $6
+APP_NAME="$6"
 
 # Check that both arguments are provided
 if [ -z "$LOG_FILE" ] || [ -z "$WEBHOOK_URL" ]; then
@@ -89,7 +90,7 @@ fi
 # Create a temporary directory for the zip file
 TEMP_DIR=$(mktemp -d)
 # Name compressed file with the above variables ^^ 
-ZIP_FILE="${hostname}-${user}-${date}_PrivilegeElevationReportLog.zip"
+ZIP_FILE="${TEMP_DIR}/${hostname}_${date}_${APP_NAME}.zip"
 
 # Compress the log file into a zip archive
 zip -j "$ZIP_FILE" "$LOG_FILE"
